@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Acceuil from "./Pages/acceuil.jsx";
-import BureauEntree from "./Pages/Bureau_entree.jsx"
+import Acceuil from "./Pages/Tsanta/acceuil.jsx";
+import BureauEntree from "./Pages/tolotra/Bureau_entree.jsx"
+import Login from "./Pages/tolotra/login.jsx"
 import './App.css';
  
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Acceuil />} />
           <Route path="/bureau_entree" element={<BureauEntree />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
