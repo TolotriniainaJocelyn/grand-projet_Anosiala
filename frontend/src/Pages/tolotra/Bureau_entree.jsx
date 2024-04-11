@@ -6,6 +6,9 @@ function Bureau_entree(){
             <Link role="button" to="/">
                 acceuil
             </Link>
+            <Link role="button" to="/login">
+                login
+            </Link>
         </>
     )
 }
