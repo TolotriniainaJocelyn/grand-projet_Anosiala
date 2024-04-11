@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Bureau_entree(){
     return(
         <>
-          <p>n nh h h</p>
+          <p>n nh j4hekjhekeeh h</p>
             <Link role="button" to="/">
                 acceuil
             </Link>
