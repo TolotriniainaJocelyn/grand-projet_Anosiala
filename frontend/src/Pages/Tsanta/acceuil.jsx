@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-
-// App.js (React)
 import React, { useState } from 'react';
 // import './App.css';
-import axios from 'axios'; // Importer Axios
+import axios from 'axios'; 
 
 function App() {
   const [nom, setNom] = useState('');
@@ -18,11 +16,9 @@ function App() {
       nom: nom,
       age: parseInt(age)
     };
-
     try {
       const response = await axios.post('/ajouterDonnees', ressources);
-
-      if (response.status === 200) {
+        if (response.status === 200) {
         setMessage('Données insérées avec succès');
       } else {
         throw new Error('Erreur lors de l\'envoi des données');
@@ -44,9 +40,7 @@ function App() {
         <button type="submit">Envoyer</button>
       </form>
       <div id="message">{message}</div>
-<Link role="button" to="/Bureau_entree">
-             Bureau_entree
-            </Link>
+        <Link role="button" to="/Bureau_entree">Bureau_entree</Link>
     </div>
   );
 }
