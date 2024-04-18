@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
-// import './App.css';
 import axios from 'axios'; 
 
-function App() {
+function Acceuil() {
   const [nom, setNom] = useState('');
   const [age, setAge] = useState('');
   const [message, setMessage] = useState('');
@@ -11,14 +10,13 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Construire un objet JSON avec nom et age comme clés
     const ressources = {
       nom: nom,
       age: parseInt(age)
     };
     try {
-      const response = await axios.post('/ajouterDonnees', ressources);
-        if (response.status === 200) {
+      const response = await axios.post('http://localhost:3000/ajouterDonnees', ressources);
+      if (response.status === 200) {
         setMessage('Données insérées avec succès');
       } else {
         throw new Error('Erreur lors de l\'envoi des données');
@@ -40,10 +38,9 @@ function App() {
         <button type="submit">Envoyer</button>
       </form>
       <div id="message">{message}</div>
-        <Link role="button" to="/Bureau_entree">Bureau_entree</Link>
+      <Link role="button" to="/bureau_entree">Bureau_entree</Link>
     </div>
   );
 }
 
-export default App;
-
+export default Acceuil;
