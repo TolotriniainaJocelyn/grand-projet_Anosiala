@@ -1,7 +1,7 @@
 // Navbar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // Importez votre fichier CSS pour la barre de navigation
+import './Navbar.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 function Navbar(){
   return (
