@@ -19,7 +19,7 @@ const LoginPage = () => {
             } else if (id === 2) {
                 window.location.href = "/page2";
             } else {
-                alert('Accès non autorisé.');
+                alert('Accès non autorisé!.');
             }
         } catch (error) {
             console.error('Erreur lors de la connexion : ', error);
