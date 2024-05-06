@@ -1,0 +1,82 @@
+
+.contenu {
+    margin: 0;
+    width: 100%;
+    height: 570px;
+    backdrop-filter: blur(5000px);
+    
+
+}
+.contenu::before{ 
+    position: absolute;
+    width: 100%;
+    height: 570px;
+    content: "";
+    filter: blur(5px);
+    background: url('../../assets/ANOSIALA.jpg');
+}
+
+
+.wrapper  {
+    font-size: 20px;
+    text-align: center;
+    color:rgb(0, 255, 8);
+    margin-top: 0;
+}
+    
+ .transparent { 
+    justify-content: center;
+    background-color: rgb(100, 1, 37);
+    /* justify-content: center; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    opacity: 0.6;
+    height: 250px;
+    border-radius: 5px;
+}
+.icon {
+    position: absolute;
+    right: 25px;
+    left: 5;
+    top: ox;
+    color: #950d0d;
+    transform: translateY(20%);
+    font-size: 16px;
+}
+.entrer {
+    width: 95%;
+    height: 100%;
+    background: aquamarine;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: blue;
+}
+
+.bouton {
+    width: 50%;
+    height: 30px;
+    background: aqua;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #260d95;
+    font-weight: 700;
+    margin-bottom: 40px;
+    display: flex;
+    margin: 20px auto;
+    justify-content:center;
+} 
+.username {
+    margin-top: 5px;
+}
+.password {
+    margin-top: 5px;
+}

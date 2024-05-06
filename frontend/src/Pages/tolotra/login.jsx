@@ -1,30 +1,55 @@
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { FaUser, FaLock } from "react-icons/fa";
+import '../tolotra/login.css';
+//import { Link } from "react-router-dom";
 
-function Login() {
+const LoginPage = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/login', { username, password });
+            const { token, id } = response.data;
+            localStorage.setItem('token', token);
+            if (id === 1) {
+                window.location.href = "/page1";
+            } else if (id === 2) {
+                window.location.href = "/page2";
+            } else {
+                alert('Accès non autorisé.');
+            }
+        } catch (error) {
+            console.error('Erreur lors de la connexion : ', error);
+            alert('Erreur lors de la connexion.');
+        }
+    };
+
     return (
-        <>
-            <div>
-                <h2>login</h2>
-                <form>
-                    <div className='mb-3'>
-                          <label htmlFor="email"><strong>Email</strong></label>
-                          <input type="email" placeholder='Entrer Email' name ='email' className='form-control rounded-0' />
+        <div className="contenu">
+            <div className='transparent'>
+                <h1 className='wrapper'>Connexion</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className='username'>
+                        <label>Username:</label>
+                        <input className='entrer' type="text" placeholder='username' value={username}  onChange={(e) => setUsername(e.target.value)} />
+                        <FaUser className='icon' />
                     </div>
-                    <div className='mb-3'>
-                          <label htmlFor="password"><strong>password</strong></label>
-                          <input type="password" placeholder='Entrer password' name ='password' className='form-control rounded-0' />
+                    <div className='password'>
+                        <label>Password:</label>
+                        <input className='entrer' type="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <FaLock className='icon' />
                     </div>
-                    <button type='submit' className='btn btn-succes w-100 rounded-0'>Connexion</button>
-                    <p>bonjour</p>
-                    {/* Remplacez la balise d'ancrage <a> par un composant Link */}
-                    <Link to="/" className='btn btn default w-100 bg-light rounded-0 text-decoration'>Accueil</Link>
+                    <button className='bouton' type="submit">Connexion</button>
                 </form>
             </div>
+        
+        </div>
+    );   
+};
 
-            {/* Utilisez le composant Link de React Router pour la navigation */}
-            <Link to="/Bureau_entree" className='btn btn-default w-100 bg-light rounded-0 text-decoration'>Bureau_entree</Link>
-        </>
-    )
-}
+export default LoginPage;
 
-export default Login;
+           
