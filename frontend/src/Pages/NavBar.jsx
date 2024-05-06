@@ -18,7 +18,8 @@ function Navbar(){
               </li>
               <li>
                   <input type="text" placeholder='Rechercher ...' className='input' />
-                  <button className='button-recherche'>Recherche</button>               
+                  <button className='button-recherche'>Recherche</button>     
+                  <h1>mande</h1>          
               </li>
             </ul>
           </div>
@@ -29,3 +30,6 @@ function Navbar(){
 };
 
 export default Navbar;
+
+
+
