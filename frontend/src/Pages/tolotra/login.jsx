@@ -23,7 +23,7 @@ const LoginPage = () => {
             }
         } catch (error) {
             console.error('Erreur lors de la connexion : ', error);
-            alert('Erreur lors de la connexion.');
+            alert('Erreur lors de la connexion!.');
         }
     };
 
