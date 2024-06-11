@@ -1,65 +1,168 @@
-import React, { useState } from 'react';
-import axios from 'axios'; 
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-function Acceuil() {
-  const [nom, setNom] = useState('');
-  const [age, setAge] = useState('');
-  const [code, setCode] = useState('');
-  const [message, setMessage] = useState('');
-  const [showForm, setShowForm] = useState(false); // État pour contrôler la visibilité du formulaire
+const Acceuil = () => {
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    dob: "",
+    gender: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (code !== '1010') {
-      setMessage('Code incorrect');
-      return;
-    }
-
-    const ressources = {
-      nom: nom,
-      age: parseInt(age)
-    };
-
-    try {
-      const response = await axios.post('http://localhost:3000/api/ajouterDonnees', ressources);
-      if (response.status === 200) {
-        setMessage('Données insérées avec succès');
-      } else {
-        throw new Error('Erreur lors de l\'envoi des données');
-      }
-    } catch (error) {
-      setMessage('Erreur lors de l\'envoi des données');
-      console.error('Erreur lors de l\'envoi des données :', error);
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleNewPatientClick = () => {
-    setShowForm(true); // Afficher le formulaire lorsque le lien est cliqué
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await fetch("http://localhost:5000/patients", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      setFormData({
+        first_name: "",
+        last_name: "",
+        dob: "",
+        gender: "",
+        email: "",
+        phone: "",
+        address: "",
+        city: "",
+      });
+      alert("Patient ajouté avec succès");
+    } catch (error) {
+      console.error("Error adding patient:", error);
+      alert("Erreur lors de l'envoi des données");
+    }
   };
 
   return (
-    <div className="App">
-      {/* Lien pour afficher le formulaire */}
-      <Link onClick={handleNewPatientClick}>Nouveau Patient</Link>
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId="formFirstName">
+              <Form.Label>Prénom</Form.Label>
+              <Form.Control
+                type="text"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                placeholder="Entrez le prénom"
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId="formLastName">
+              <Form.Label>Nom</Form.Label>
+              <Form.Control
+                type="text"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                placeholder="Entrez le nom"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-      {/* Afficher le formulaire si showForm est vrai */}
-      {showForm && (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="nom">Nom :</label>
-          <input type="text" id="nom" name="nom" value={nom} onChange={(e) => setNom(e.target.value)} required/>
-          <label htmlFor="age">Age :</label>
-          <input type="number" id="age" name="age" value={age} onChange={(e) => setAge(e.target.value)} required/>
-          <label htmlFor="code">Code :</label>
-          <input type="password" id="code" name="code" value={code} onChange={(e) => setCode(e.target.value)} required/>
-          <button type="submit">Envoyer</button>
-        </form>
-      )}
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId="formDOB">
+              <Form.Label>Date de Naissance</Form.Label>
+              <Form.Control
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId="formGender">
+              <Form.Label>Sexe</Form.Label>
+              <Form.Control
+                as="select"
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+              >
+                <option value="">Sélectionnez</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+                <option value="Autre">Autre</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
 
-      <div id="message">{message}</div>
-    </div>
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Entrez l'email"
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId="formPhone">
+              <Form.Label>Téléphone</Form.Label>
+              <Form.Control
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Entrez le téléphone"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId="formAddress">
+              <Form.Label>Adresse</Form.Label>
+              <Form.Control
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Entrez l'adresse"
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId="formCity">
+              <Form.Label>Ville</Form.Label>
+              <Form.Control
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                placeholder="Entrez la ville"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+
+        <Button variant="primary" type="submit">
+          Soumettre
+        </Button>
+      </Form>
+    </Container>
   );
-}
+};
 
 export default Acceuil;
